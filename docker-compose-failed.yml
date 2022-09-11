@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: minh4_senhA-l0cal
+
+  phpmyadmin:
+    # Provavelmente é por causa do fpm-alpine, aparentemente tem que fazer mais alguma configuração
+    image: phpmyadmin:5.2.0-fpm-alpine
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      - PMA_ARBITRARY=1
