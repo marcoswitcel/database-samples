@@ -3,6 +3,13 @@ CREATE DATABASE IF NOT EXISTS company;
 
 USE company;
 
+-- Seria legal criar um domínio customizado, porém o MYSQL
+-- não oferece suporte a esse comando. Exempĺo abaixo:
+-- CREATE DOMAIN D_num AS INT CHECK(D_num > 0 AND D_num < 21);
+
+-- https://stackoverflow.com/questions/2115497/check-constraint-in-mysql-is-not-working
+-- A partir do MySQL 8.0.16 o comando CHECK gera check constraints, antes ele era apenas ignorado, isso quando não causava erro de síntaxe
+
 CREATE TABLE company.employee(
     Fname VARCHAR(15) NOT NULL,
     Minit CHAR,
@@ -14,7 +21,8 @@ CREATE TABLE company.employee(
     Salary DECIMAL(10, 2),
     Super_ssn char(9),
     Dno INT NOT NULL,
-    PRIMARY KEY (Ssn)
+    CONSTRAINT chk_salary_employee CHECK (Salary > 2000.0), -- Constraint de checagem que exige um valor maior que 2000.0 para armazenar o registro
+    CONSTRAINT pk_employee PRIMARY KEY (Ssn)
 );
 
 CREATE TABLE departament(
@@ -22,16 +30,18 @@ CREATE TABLE departament(
     Dnumber INT NOT NULL,
     Mgr_ssn CHAR(9),
     Mgr_start_date DATE,
-    PRIMARY KEY (Dnumber),
-    UNIQUE (Dname),
+    Dept_create_date Date,
+    CONSTRAINT chk_date_departament CHECK (Dept_create_date < Mgr_start_date),
+    CONSTRAINT pk_departament PRIMARY KEY (Dnumber),
+    CONSTRAINT unique_name_departament UNIQUE (Dname),
     FOREIGN KEY (Mgr_ssn) REFERENCES employee(Ssn)
 );
 
 CREATE TABLE dept_locations(
     Dnumber INT NOT NULL,
     Dlocation VARCHAR(15) NOT NULL,
-    PRIMARY KEY (Dnumber, Dlocation),
-    FOREIGN KEY (Dnumber) REFERENCES departament(Dnumber)
+    CONSTRAINT pk_dnumber_dept_locations PRIMARY KEY (Dnumber, Dlocation),
+    CONSTRAINT fk_dnumber_dept_locations FOREIGN KEY (Dnumber) REFERENCES departament(Dnumber)
 );
 
 CREATE TABLE project(
