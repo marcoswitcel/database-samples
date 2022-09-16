@@ -93,3 +93,6 @@ CREATE TABLE dependent(
     PRIMARY KEY (Essn, Dependent_name),
     FOREIGN KEY (Essn) REFERENCES employee(Ssn)
 );
+
+-- Consultas
+SELECT `e`.`Fname`, `d`.`Dname` FROM employee e, departament d WHERE (d.Mgr_ssn = e.Ssn);
