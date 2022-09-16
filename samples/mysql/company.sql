@@ -34,8 +34,17 @@ CREATE TABLE departament(
     CONSTRAINT chk_date_departament CHECK (Dept_create_date < Mgr_start_date),
     CONSTRAINT pk_departament PRIMARY KEY (Dnumber),
     CONSTRAINT unique_name_departament UNIQUE (Dname),
-    FOREIGN KEY (Mgr_ssn) REFERENCES employee(Ssn)
+    CONSTRAINT fk_departament FOREIGN KEY (Mgr_ssn) REFERENCES employee(Ssn)
 );
+
+-- Exemplo de alter table 'on update cascade'
+-- Caso tentem alterar o id do elemento referência, a atualização será realiza aqui também
+-- sem essa configuração o update falharia.
+ALTER TABLE departament DROP CONSTRAINT fk_departament;
+ALTER TABLE departament
+    ADD CONSTRAINT fk_departament
+    FOREIGN KEY (Mgr_ssn) REFERENCES employee(Ssn)
+    ON UPDATE CASCADE;
 
 CREATE TABLE dept_locations(
     Dnumber INT NOT NULL,
@@ -43,6 +52,18 @@ CREATE TABLE dept_locations(
     CONSTRAINT pk_dnumber_dept_locations PRIMARY KEY (Dnumber, Dlocation),
     CONSTRAINT fk_dnumber_dept_locations FOREIGN KEY (Dnumber) REFERENCES departament(Dnumber)
 );
+
+-- Exemplo de alter table 'on delete cascade'
+-- Nesse caso configuramos uma relação de dependência, se deletar o departamento as localizações
+-- associadas serão deletadas também, sem essa configuração seria necessário deletar as localizações
+-- para poder deletar o departamento.
+ALTER TABLE dept_locations DROP CONSTRAINT fk_dnumber_dept_locations;
+ALTER TABLE dept_locations
+    ADD CONSTRAINT fk_dnumber_dept_locations
+    FOREIGN KEY (Dnumber) REFERENCES departament(Dnumber)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+
 
 CREATE TABLE project(
     Pname VARCHAR(15) NOT NULL,
