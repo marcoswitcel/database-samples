@@ -25,6 +25,9 @@ CREATE TABLE company.employee(
     CONSTRAINT pk_employee PRIMARY KEY (Ssn)
 );
 
+-- Select com informação derivada INSS
+SELECT Fname, Lname, Salary, round(Salary * 0.11) as INSS FROM employee;
+
 CREATE TABLE departament(
     Dname VARCHAR(15) NOT NULL,
     Dnumber INT NOT NULL,
@@ -96,3 +99,6 @@ CREATE TABLE dependent(
 
 -- Consultas
 SELECT `e`.`Fname`, `d`.`Dname` FROM employee e, departament d WHERE (d.Mgr_ssn = e.Ssn);
+
+-- Exemplo de consulta em múltiplas tabelas usando filtragem com where
+SELECT * FROM employee e, works_on w, project p WHERE e.Ssn = w.Essn AND w.Pno = p.Pnumber;
