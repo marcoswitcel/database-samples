@@ -27,6 +27,9 @@ CREATE TABLE company.employee(
 
 -- Select com informação derivada INSS
 SELECT Fname, Lname, Salary, round(Salary * 0.11) as INSS FROM employee;
+-- Select com busca por valor dentro de um intervalo sem e com o operador BETWEEN
+SELECT Fname, Lname, Salary, round(Salary * 0.11) as INSS FROM employee WHERE Salary > 3000 AND Salary < 4000;
+SELECT Fname, Lname, Salary, round(Salary * 0.11) as INSS FROM employee WHERE Salary BETWEEN 3000 AND 4000;
 
 CREATE TABLE departament(
     Dname VARCHAR(15) NOT NULL,
