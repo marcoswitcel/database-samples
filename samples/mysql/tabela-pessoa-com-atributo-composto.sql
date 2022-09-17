@@ -20,6 +20,10 @@ INSERT INTO pessoas (nome, nome_do_meio, sobrenome)
 -- ----------------------
 -- EXEMPLOS DE SELECT
 -- ----------------------
+-- Na tabela pessoa o conceito de 'nome completo' é um atributo composto, pois o 'nome completo'
+-- é composto de três partes: nome, nome do meio e sobrenome.
+-- No final esse atributo composto é 'derivado', criado/computador a partir de uma expressão
+-- para forma o 'nome completo'.
 SELECT CONCAT(nome, " ", COALESCE(nome_do_meio, ""), " ", sobrenome) as nome_completo
   FROM pessoas;
 
