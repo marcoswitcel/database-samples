@@ -105,3 +105,16 @@ SELECT `e`.`Fname`, `d`.`Dname` FROM employee e, departament d WHERE (d.Mgr_ssn 
 
 -- Exemplo de consulta em múltiplas tabelas usando filtragem com where
 SELECT * FROM employee e, works_on w, project p WHERE e.Ssn = w.Essn AND w.Pno = p.Pnumber;
+
+-- Subconsultas
+SELECT DISTINCT Essn FROM works_on
+    WHERE (Pno, Hours) IN (
+        SELECT Pno, Hours FROM works_on WHERE Essn = '123456789'
+    );
+
+-- Exemplos
+-- Consulta que responde a pergunta: Quais funcionários possuem dependentes?
+SELECT e.Fname, e.Lname FROM employee as e
+    WHERE EXISTS (
+        SELECT * FROM dependent as d WHERE e.Ssn = d.Essn AND e.Fname = d.Dependent_name
+    );
