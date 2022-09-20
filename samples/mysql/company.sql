@@ -118,3 +118,13 @@ SELECT e.Fname, e.Lname FROM employee as e
     WHERE EXISTS (
         SELECT * FROM dependent as d WHERE e.Ssn = d.Essn AND e.Fname = d.Dependent_name
     );
+
+-- Exemplos de Order By
+-- Por padrão os registros não possuem ordenação (são um conjunto), para garantir a ordenação
+-- precisamos transformar o conjunto em uma lista ordenada com o ORDER BY
+SELECT * FROM employee ORDER BY Fname, Lname; -- Por padrão do menor para o maior (ASC)
+
+SELECT DISTINCT d.Dname, CONCAT_WS(" ", e.Fname, e.Lname) as Manager, Address
+    FROM departament as d, employee as e, works_on as w, project as p
+    WHERE (d.Dnumber = e.Dno AND e.Ssn = d.Mgr_ssn AND w.Pno = p.Pnumber)
+    ORDER BY d.Dname, Manager;
