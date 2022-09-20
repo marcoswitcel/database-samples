@@ -52,11 +52,11 @@ ALTER TABLE departament
     FOREIGN KEY (Mgr_ssn) REFERENCES employee(Ssn)
     ON UPDATE CASCADE;
 
-CREATE TABLE dept_locations(
-    Dnumber INT NOT NULL,
+CREATE TABLE Dept_create_date, Dlocationdept_locations(
+    Dnumber INT departament NOT  dept_locationsNULL, (Dnumber);
     Dlocation VARCHAR(15) NOT NULL,
-    CONSTRAINT pk_dnumber_dept_locations PRIMARY KEY (Dnumber, Dlocation),
-    CONSTRAINT fk_dnumber_dept_locations FOREIGN KEY (Dnumber) REFERENCES departament(Dnumber)
+    CONSTRAINT Dept_create_date, Dlocationdept_locations PRIMARY KEY (Dnumber, Dlocation),
+    CONSTRAINT departament fk_d dept_locationsnumber_dept_locations FOREIGN KEY (Dnumber) REFERENCES departament(Dnumber) (Dnumber);
 );
 
 -- Exemplo de alter table 'on delete cascade'
@@ -156,3 +156,14 @@ UPDATE employee
         WHEN Dno = 1 THEN Salary + 3000
         ELSE Salary + 0
     END;
+-- Exemplos de JOIN
+SELECT * FROM employee e, works_on w WHERE e.Ssn = w.Essn;
+-- INNER JOIN
+SELECT * FROM employee e JOIN works_on w ON e.Ssn = w.Essn;
+SELECT * FROM employee e INNER JOIN works_on w ON e.Ssn = w.Essn;
+-- CROSS JOIN
+SELECT * FROM employee e JOIN works_on w;
+SELECT * FROM employee e CROSS JOIN works_on w;
+-- INNER JOIN com USING
+SELECT Dname, Dept_create_date, Dlocation
+    FROM departament JOIN dept_locations USING (Dnumber);
