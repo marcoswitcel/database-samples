@@ -128,3 +128,17 @@ SELECT DISTINCT d.Dname, CONCAT_WS(" ", e.Fname, e.Lname) as Manager, Address
     FROM departament as d, employee as e, works_on as w, project as p
     WHERE (d.Dnumber = e.Dno AND e.Ssn = d.Mgr_ssn AND w.Pno = p.Pnumber)
     ORDER BY d.Dname, Manager;
+
+-- Exemplos de agrupamento
+SELECT count(*) FROM employee;
+SELECT count(*) FROM employee, departament
+    WHERE Dno = Dnumber AND Dname = 'Research';
+SELECT Dno, count(*) as numero_de_pessoas, round(avg(Salary), 2) as media_salarial  FROM employee
+    GROUP BY Dno;
+SELECT count(DISTINCT Salary) FROM employee;
+SELECT MIN(Salary), MAX(Salary), AVG(Salary), SUM(Salary) FROM employee;
+SELECT Pnumber, Pname, count(*) as Number_of_registers, round(avg(Salary)) as AVG_Salary
+    FROM project, works_on, employee
+    WHERE Pnumber = Pno AND Ssn = Essn
+    GROUP BY Pnumber
+    ORDER BY count(*);
