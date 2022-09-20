@@ -142,3 +142,9 @@ SELECT Pnumber, Pname, count(*) as Number_of_registers, round(avg(Salary)) as AV
     WHERE Pnumber = Pno AND Ssn = Essn
     GROUP BY Pnumber
     ORDER BY count(*);
+-- Exemplo de HAVING
+SELECT Pnumber, Pname, count(*)
+    FROM project, works_on
+    WHERE Pnumber = Pno
+    GROUP BY Pnumber, Pname
+        HAVING count(*) > 2; -- Condição sobre as informações agrupadas
