@@ -148,3 +148,11 @@ SELECT Pnumber, Pname, count(*)
     WHERE Pnumber = Pno
     GROUP BY Pnumber, Pname
         HAVING count(*) > 2; -- Condição sobre as informações agrupadas
+-- Exemplo de CASE
+UPDATE employee
+    SET Salary = CASE
+        WHEN Dno = 5 THEN Salary + 2000
+        WHEN Dno = 4 THEN Salary + 1500
+        WHEN Dno = 1 THEN Salary + 3000
+        ELSE Salary + 0
+    END;
