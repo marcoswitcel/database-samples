@@ -167,3 +167,7 @@ SELECT * FROM employee e CROSS JOIN works_on w;
 -- INNER JOIN com USING
 SELECT Dname, Dept_create_date, Dlocation
     FROM departament JOIN dept_locations USING (Dnumber);
+-- OUTER JOIN
+SELECT * FROM employee INNER JOIN dependent ON Ssn = Essn; -- Apenas exemplo para comparar o resultado
+SELECT * FROM employee LEFT JOIN dependent ON Ssn = Essn;
+SELECT * FROM employee LEFT OUTER JOIN dependent ON Ssn = Essn;
