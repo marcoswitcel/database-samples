@@ -22,6 +22,7 @@ USE `ecommerce_dio` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce_dio`.`cliente` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(150) NOT NULL,
   `tipo` ENUM("cpf", "cnpj") NOT NULL,
   `identificacao` VARCHAR(45) NOT NULL,
   `endereco` VARCHAR(125) NOT NULL,
