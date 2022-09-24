@@ -21,7 +21,7 @@ USE `ecommerce_dio` ;
 -- Table `ecommerce_dio`.`cliente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce_dio`.`cliente` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `tipo` ENUM("cpf", "cnpj") NOT NULL,
   `identificacao` VARCHAR(45) NOT NULL,
   `endereco` VARCHAR(125) NOT NULL,
@@ -33,7 +33,7 @@ ENGINE = InnoDB;
 -- Table `ecommerce_dio`.`produto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce_dio`.`produto` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `categoria` VARCHAR(50) NOT NULL,
   `descricao` TEXT(150) NOT NULL,
   `valor` DECIMAL NOT NULL,
@@ -45,7 +45,7 @@ ENGINE = InnoDB;
 -- Table `ecommerce_dio`.`estoque`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce_dio`.`estoque` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `local` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -55,7 +55,7 @@ ENGINE = InnoDB;
 -- Table `ecommerce_dio`.`pedido`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce_dio`.`pedido` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `status_do_pedido` VARCHAR(45) NOT NULL,
   `descricao` VARCHAR(150) NOT NULL,
   `cliente_id` INT NOT NULL,
@@ -74,7 +74,7 @@ ENGINE = InnoDB;
 -- Table `ecommerce_dio`.`fornecedor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce_dio`.`fornecedor` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `razao_social` VARCHAR(125) NOT NULL,
   `cnpj` VARCHAR(16) NOT NULL,
   PRIMARY KEY (`id`))
@@ -153,7 +153,7 @@ ENGINE = InnoDB;
 -- Table `ecommerce_dio`.`vendedor_terceiro`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce_dio`.`vendedor_terceiro` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `razao_social` VARCHAR(45) NOT NULL,
   `local` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -187,7 +187,7 @@ ENGINE = InnoDB;
 -- Table `ecommerce_dio`.`forma_de_pagamento`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce_dio`.`forma_de_pagamento` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `dados` VARCHAR(45) NULL,
   `cliente_id` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -204,7 +204,7 @@ ENGINE = InnoDB;
 -- Table `ecommerce_dio`.`entrega`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ecommerce_dio`.`entrega` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `status` VARCHAR(45) NOT NULL,
   `codigo_de_rastreio` VARCHAR(45) NOT NULL,
   `pedido_id` INT NOT NULL,
